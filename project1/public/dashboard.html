@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+
+        .headers {
+            background-color: #2C3639;
+            width: 100%;
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            position: relative;
+        }
+
+        .sideNav {
+            width: 250px;
+            height: calc(100% - 74px);
+            left: -250px;
+            padding: 0px 10px;
+            position: fixed;
+            top: 74px;
+            background-color: #3F4E4F;
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: left 0.5s ease;
+        }
+
+        .part-1 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .dashboard {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .menu-button {
+            margin: 8px;
+            padding: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+
+        .dashboard p {
+            font-size: 20px;
+            font-weight: 900;
+            margin: 8px 20px 8px 20px;
+        }
+
+        .user {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 100%;
+            font-size: 12px;
+            padding: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            border-bottom: 1px solid rgb(167, 166, 166);
+        }
+
+        .user-img {
+            border-radius: 50%;
+            padding: 0px 8px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .user div {
+            margin: 8px;
+        }
+
+        .user h2 {
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        ul {
+            list-style: none;
+            width: 100%;
+        }
+
+        ul li {
+            margin: 20px 0px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            cursor: pointer;
+            row-gap: 20px;
+            background-color: #3F4E4F;
+            border-radius: 10px;
+            padding: 0px 5px;
+        }
+
+        ul li i {
+            margin: 8px;
+        }
+
+        ul li p {
+            white-space: nowrap;
+            margin: 8px;
+        }
+
+        ul li p a {
+            color: black;
+            text-decoration: none;
+        }
+
+
+
+        .menu-open-button {
+            margin: 8px;
+            padding: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            cursor: pointer;
+            position: fixed;
+            top: 70px;
+            left: 0px;
+            z-index: 1000;
+            transition: left 0.5s ease;
+        }
+
+        .menu-open-button:hover {
+            background-color: #A27B5C;
+        }
+
+        .menu-button:hover {
+            background-color: #A27B5C;
+        }
+
+        ul li:hover {
+            background-color: #DCD7C9;
+
+            transition: scale(0.1) 0.5s;
+        }
+
+        .webpage {
+            left: 0px;
+            position: relative;
+            top: 74px;
+            margin: 0px 0px 0px 70px;
+            transition: left 0.5s;
+            width: calc(100% - 250px);
+            overflow-y: auto;
+            height: calc(100vh - 74px);
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+            /* background-size: cover; */
+            /* box-sizing: border-box; */
+        }
+
+        .sideNav.active {
+            /* top: 70px; */
+            left: 0;
+            /* height: calc(100vh - 70px); */
+        }
+
+        .menu-open-button.movedbutton {
+            left: 250px;
+        }
+
+        .webpage.active {
+            left: 250px;
+            width: calc(100% - 500px);
+        }
+
+        .calender {
+            border-radius: 10px;
+        }
+
+
+
+        .item {
+            /* border: 2px solid white; */
+            justify-content: center;
+            background-color: #2C3639;
+            /* align-self: center; */
+            /* justify-self: center; */
+
+        }
+
+
+
+
+        .web-identity {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            /* margin-bottom: 20px; */
+            background-color: #80888a;
+            width: 100%;
+            padding: 10px 30px;
+            position: fixed;
+            z-index: 1;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo-name {
+            font-size: 35px;
+            cursor: pointer;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            /* justify-items: center; */
+            align-items: center;
+        }
+
+        .add-task {
+            padding: 20px;
+
+        }
+
+
+
+        .add-task a button {
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #A27B5C;
+
+        }
+
+
+        .date {
+            display: flex;
+            justify-content: space-around;
+
+        }
+
+        .from {
+            padding: 20px;
+        }
+
+        .from input {
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
+        .to {
+            padding: 20px;
+        }
+
+        .to input {
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
+        body {
+            overflow-y: auto;
+        }
+
+        .webpage::-webkit-scrollbar {
+            display: none;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        .work-head {
+            display: grid;
+            grid-template-columns: 30% 30% 30%;
+            grid-template-rows: 1px;
+            /* border: 2px solid white; */
+            justify-content: space-evenly;
+            padding: 0px 60px;
+            margin: 40px 10px 0px 10px;
+            /* background-color: #A27B5C; */
+            /* column-gap: 3%; */
+
+        }
+
+        .work-head div span {
+            font-size: 20px;
+            padding: 10px;
+        }
+
+        .points {
+            display: flex;
+            /* justify-content: center; */
+            align-items: center;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 30% 30% 30%;
+            /* grid-template-rows: 500px; */
+            /* border: 2px solid white; */
+            justify-content: space-evenly;
+            padding: 10px;
+            margin: 10px;
+            /* background-color: #A27B5C; */
+            /* column-gap: 3%; */
+
+        }
+
+        .box {
+            display: grid;
+
+            grid-template-columns: 90%;
+            margin: 10px;
+            justify-content: center;
+            align-content: flex-start;
+            background-color: #3F4E4F;
+            border-radius: 10px;
+
+        }
+
+        .box1 {
+            display: grid;
+            /* grid-template-rows: 30% 30% 30%; */
+            grid-template-columns: 90%;
+            /* border: 2px solid white; */
+            justify-content: center;
+            align-content: center;
+            background-color: #3F4E4F;
+            border-radius: 10px;
+
+        }
+
+        .box2 {
+            display: grid;
+            /* grid-template-rows: 30% 30% 30%; */
+            grid-template-columns: 90%;
+            /* border: 2px solid white; */
+            justify-content: center;
+            align-content: center;
+            background-color: #3F4E4F;
+            border-radius: 10px;
+
+        }
+
+        .box3 {
+            display: grid;
+            /* grid-template-rows: 30% 30% 30%; */
+            grid-template-columns: 90%;
+            /* border: 2px solid white; */
+            justify-content: center;
+            align-content: center;
+            background-color: #3F4E4F;
+            border-radius: 10px;
+
+        }
+
+
+
+        .item {
+            display: flex;
+            flex-direction: row;
+            border-radius: 10px;
+            justify-content: space-between;
+            min-height: 120px;
+            margin: 10px;
+        }
+
+        .line-1 {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 10px;
+        }
+
+        .line-1A {
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .line-1a {
+            font-size: 25px;
+        }
+
+        .line-1b {
+            padding: 15px 0px;
+        }
+
+        /* .dropdown {
+            padding-top: 0px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        } */
+    </style>
+    <style>
+        .dropdown {
+            padding-top: 0px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            cursor: pointer;
+
+        }
+
+        .dropdown i {
+            padding: 10px;
+        }
+
+        .dropdown a {
+            display: block;
+            color: black;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .dropdown .content {
+            display: none;
+            position: absolute;
+            min-width: 100px;
+            border-radius: 10px;
+            background-color: #2C3639;
+            box-shadow: 2px 2px 2px black;
+            /* color: #A27B5C; */
+        }
+
+        .content a {
+            color: #DCD7C9;
+        }
+
+        .dropdown:hover .content {
+            display: block;
+
+
+        }
+
+        .dropdown a:hover {
+            background-color: #3F4E4F;
+            border-radius: 10px;
+
+        }
+
+
+
+
+        .welcome {
+            padding: 15px;
+        }
+
+        .greet {
+            font-size: 35px;
+            color: #DCD7C9;
+        }
+
+        .back {
+            font-size: 20px;
+            color: #DCD7C9;
+        }
+
+        .google-calender {
+            background-color: #A27B5C;
+            position: absolute;
+            top: 50vh;
+        }
+
+        .google-calender iframe {
+            border-radius: 10px;
+            /* background-color: #3F4E4F; */
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="web-identity">
+            <div class="logo" onclick="home()"><img src="assets/todo3.png" alt=""></div>
+            <div class="logo-name" onclick="home()">ToDos</div>
+        </div>
+    </nav>
+
+    <div class="headers">
+        <div class="menu-open-button" id="menu-open-button" onclick="movebutton()">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <div class="sideNav" id="sideNav">
+            <div class="part-1">
+                <div class="dashboard" id="dashboard">
+                    <button onclick="movebutton()" class="menu-button">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <p>Dashboard</p>
+                </div>
+                <div class="user">
+                    <img src="assets/person.jpg" alt="user image" class="user-img">
+                    <div class="details">
+                        <h2 class="details-name" id="details-name">ABCDEF</h2>
+                        <p class="details-email" id="details-email">xyz@gmail.com</p>
+                    </div>
+                </div>
+                <ul>
+                    <li>
+                        <i class="fa-solid fa-plus"></i>
+                        <p><a href="task.html">Add task</a></p>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-calendar"></i>
+                        <p><a href="#">Calender</a></p>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-list-check"></i>
+                        <p><a href="mytask.html">My tasks</a></p>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-trash"></i>
+                        <p><a href="#">Delete tasks</a></p>
+                    </li>
+                </ul>
+            </div>
+
+
+            <ul class="logout" onclick="logout()">
+                <li>
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <p>Log out</p>
+                </li>
+            </ul>
+
+        </div>
+        <div class="webpage" id="webpage" style="color: white;">
+
+            <header>
+                <div class="welcome">
+                    <div class="greet">
+                        <span class="hi">Hi&nbsp</span>
+                        <span class="greet-name" id="greet-name"></span>
+                        <span class="!">!</span>
+                    </div>
+                    <div class="back">Welcome to the ToDos family </div>
+                </div>
+                <div class="content">
+                    <div class="add-task">
+                        <a href="task.html"> <button type="button">Add Task <i
+                                    class="fa-solid fa-square-plus"></i></button></a>
+                        <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+                    </div>
+                    <div class="date">
+                        <div class="from">
+
+                            <input type="text" placeholder="From" onfocus="this.type='date'"
+                                onblur="if(!this.value)this.type='text'">
+                            <!-- <i class="fa-solid fa-calendar"></i> -->
+                        </div>
+                        <div class="to">
+                            <input type="text" placeholder="To" onfocus="this.type='date'"
+                                onblur="if(!this.value)this.type='text'">
+                            <!-- <i class="fa-solid fa-calendar"></i> -->
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main>
+
+                <div class="work-head">
+                    <div class="points toStart"><i class="fa-solid fa-circle"
+                            style="color: red; font-size: 10px;"></i><span>To Start</span></div>
+                    <div class="points inProgress"><i class="fa-solid fa-circle"
+                            style="color: yellow; font-size: 10px;"></i><span>In Progress</span></div>
+                    <div class="points hasCompleted"><i class="fa-solid fa-circle"
+                            style="color: green; font-size: 10px;"></i><span>Completed</span></div>
+                </div>
+                <div class="container">
+                    <div class="box box-1">
+                        <!-- <div class="item item1">
+                            <div class="line-1">
+                                <div class="line-1A">
+                                    <div class="line-1a"></div>
+                                    <div class="line-1b">
+                                    </div>
+                                </div>
+                                <div class="line-1B"></div>
+                            </div>
+
+                            <div class="dropdown">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                <div class="content">
+                                    <a href="">Edit</a>
+                                    <a href="">Delete</a>
+                                    <a href="">Completed</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="box box-2">
+                        <!-- <div class="item item2">
+                            <div class="line-1">
+                                <div class="line-1A">
+                                    <div class="line-1a">Title of task</div>
+                                    <div class="line-1b">No Tasks in Progress!!! Add a task
+                                    </div>
+                                </div>
+                                <div class="line-1B">dd/mm/yyyy</div>
+                            </div>
+
+                            <div class="dropdown">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                <div class="content">
+                                    <a href="">Edit</a>
+                                    <a href="">Delete</a>
+                                    <a href="">Completed</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="box box-3">
+                        <!-- <div class="item item3">
+                            <div class="line-1">
+                                <div class="line-1A">
+                                    <div class="line-1a">Title of task</div>
+                                    <div class="line-1b">No Tasks completed!!! Add a task
+                                    </div>
+                                </div>
+                                <div class="line-1B">dd/mm/yyyy</div>
+                            </div>
+
+                            <div class="dropdown">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                <div class="content">
+                                    <a href="">Edit</a>
+                                    <a href="">Delete</a>
+                                    <a href="">Completed</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </main>
+            <footer></footer>
+
+            <!-- <div class="google-calender" >
+                <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FKolkata&src=ZW4tZ2IuaW5kaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23616161" style="border:solid 1px #777" width="400" height="300" frameborder="0" scrolling="no"></iframe> -->
+
+        </div>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script>
+        function home() {
+            window.location.href = "index.html"
+        }
+
+        function movebutton() {
+            document.getElementById('sideNav').classList.toggle('active')
+            document.getElementById('menu-open-button').classList.toggle('movedbutton')
+            let movedpage = document.getElementById('webpage').classList.toggle('active')
+
+        }
+
+        window.onload = async function task() {
+            const token = localStorage.getItem("token")
+            const response = await axios.get("http://localhost:3000/user/todos",
+                {
+                    headers: {
+                        "token": token
+                    }
+                })
+            console.log(response);
+
+            document.getElementsByClassName('box-1').innerHTML = ''
+            document.getElementsByClassName('box-2').innerHTML = ''
+            document.getElementsByClassName('box-3').innerHTML = ''
+            function createNoTask(box, message) {
+                let a = document.createElement('div')
+                a.setAttribute("class", "item")
+                let b = document.createElement('div')
+                b.setAttribute("class", "line-1")
+                let c = document.createElement('div')
+                c.setAttribute("class", "line-1A")
+                let d = document.createElement('div')
+                d.setAttribute("class", "line-1a")
+                let e = document.createElement('div')
+                e.setAttribute("class", "line-1b")
+                let f = document.createElement('div')
+                f.setAttribute("class", "line-1B")
+                c.appendChild(d)
+                c.appendChild(e)
+                b.appendChild(c)
+                b.appendChild(f)
+                a.appendChild(b)
+                box.appendChild(a)
+                d.innerHTML = "Title of the task"
+                e.innerHTML = message
+                f.innerHTML = "dd/mm/yy"
+            }
+            function createTask(box, taskData) {
+                //taskData=response.data.todo[i]
+                let a = document.createElement('div')
+                a.setAttribute("class", "item")
+                let b = document.createElement('div')
+                b.setAttribute("class", "line-1")
+                let c = document.createElement('div')
+                c.setAttribute("class", "line-1A")
+                let d = document.createElement('div')
+                d.setAttribute("class", "line-1a")
+                let e = document.createElement('div')
+                e.setAttribute("class", "line-1b")
+                let f = document.createElement('div')
+                f.setAttribute("class", "line-1B")
+                let g = document.createElement('div')
+                g.setAttribute("class", "dropdown")
+                let h = document.createElement('i')
+                h.setAttribute("class", "fa-solid fa-ellipsis-vertical")
+                let w = document.createElement('div')
+                w.setAttribute("class", "content")
+                let j = document.createElement('a')
+                j.setAttribute("class", "edit-a")
+                let k = document.createElement('a')
+                k.setAttribute("class", "delete-a")
+                // k.onclick=function(){deleteTodo(taskData.uId)}
+                k.onclick = function () { deleteTodo(taskData.uId) };
+                let l = document.createElement('a')
+                l.setAttribute("class", "completed-a")
+                l.setAttribute("id", "completed-a")
+                l.onclick = function () { completeTodo(taskData.uId) }
+                a.id = taskData.uId
+                c.appendChild(d)
+                c.appendChild(e)
+                b.appendChild(c)
+                b.appendChild(f)
+                w.appendChild(j)
+                w.appendChild(k)
+                w.appendChild(l)
+                g.appendChild(h)
+                g.appendChild(w)
+                a.appendChild(b)
+                a.appendChild(g)
+                box.appendChild(a)
+                // console.log(taskData);
+                d.innerHTML = taskData.title
+                e.innerHTML = taskData.description
+                f.innerHTML = taskData.date
+                j.innerHTML = "Edit"
+                k.innerHTML = "Delete"
+                l.innerHTML = "Completed"
+            }
+            let taskInBox1 = 0
+            let taskInBox2 = 0
+            let taskInBox3 = 0
+            for (let i = 0; i < response.data.todo.length; i++) {
+                if (response.data.todo[i].status === 'To Start') {
+                    taskInBox1 = taskInBox1 + 1
+                }
+                else if (response.data.todo[i].status === 'In Progress') {
+                    taskInBox2 = taskInBox2 + 1
+                }
+                else {
+                    taskInBox3 = taskInBox3 + 1
+                }
+            }
+            // console.log(response.data.todo.length);
+            if (response.data.todo.length === 0) {
+                createNoTask(document.getElementsByClassName('box-1')[0], "No Tasks to Display!!! Add a task")
+                createNoTask(document.getElementsByClassName('box-2')[0], "No Tasks in Progress!!! Add a task")
+                createNoTask(document.getElementsByClassName('box-3')[0], "No Tasks Completed!!! Add a task")
+
+            }
+            else {
+                for (let i = 0; i < response.data.todo.length; i++) {
+                    if (response.data.todo[i].status === 'To Start') {
+                        createTask(document.getElementsByClassName('box-1')[0], response.data.todo[i])
+                    }
+                    else if (response.data.todo[i].status === 'In Progress') {
+                        // createTask(document.getElementsByClassName('box-1')[0], response.data.todo[i])
+                        createTask(document.getElementsByClassName('box-2')[0], response.data.todo[i])
+                    }
+                    else {
+                        // createTask(document.getElementsByClassName('box-1')[0], response.data.todo[i])
+                        createTask(document.getElementsByClassName('box-3')[0], response.data.todo[i])
+                    }
+                }
+                if (taskInBox2 == 0) {
+                    createNoTask(document.getElementsByClassName('box-2')[0], "No Tasks in Progress!!! Add a task")
+                }
+                if (taskInBox3 == 0) {
+                    createNoTask(document.getElementsByClassName('box-3')[0], "No Tasks Completed!!! Add a task")
+                }
+                if (taskInBox1 == 0) {
+                    createNoTask(document.getElementsByClassName('box-1')[0], "No Tasks to Display!!! Add a task")
+                }
+            }
+            // console.log();
+
+
+            const response2 = await axios.get("http://localhost:3000/user", {
+                headers: { "token": token }
+            })
+            // console.log(response2)
+            let x = document.getElementById('greet-name')
+            x.innerHTML = response2.data.data.name
+            let y = document.getElementById('details-name')
+            y.innerHTML = response2.data.data.name
+            let z = document.getElementById('details-email')
+            z.innerHTML = response2.data.data.email
+        }
+
+        function mytask() {
+            window.location.href = "mytask.html"
+        }
+        function logout() {
+            localStorage.removeItem("token", localStorage.getItem("token"))
+            window.location.href = "index.html"
+        }
+
+        async function upateTodo() {
+            let token = localStorage.getItem("token")
+            const response = await axios.put("http://localhost:3000/user/todos",
+                {
+                    headers: {
+                        "token": token
+                    }
+                }
+            )
+        }
+        async function deleteTodo(id) {
+            console.log("delete in todo");
+
+            let token = localStorage.getItem("token")
+            const response2 = await axios.delete("http://localhost:3000/user/todos",
+                {
+                    headers: {
+                        "token": token,
+                        "uId": id
+                    }
+                }
+            )
+            window.location.reload()
+        }
+
+        async function completeTodo(id) {
+            let token = localStorage.getItem("token")
+            console.log("completeTodo end");
+
+            const response = await axios.put("http://localhost:3000/user/todos",
+                {
+                    headers: {
+                        "token": token,
+                        "uId": id
+                    }
+                }
+            )
+            console.log("completed");
+        }
+
+    </script>
+</body>
+
+</html>

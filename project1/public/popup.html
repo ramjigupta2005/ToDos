@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .pop-container {
+            position: absolute;
+            /* display: flex;
+                justify-content: center;
+                align-items: center; */
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            padding: 30px;
+            background-image: linear-gradient(#2C3639 0%, #2C3639 10%, #606262 50%, #2C3639 90%, #2C3639 100%);
+        }
+
+        .pop-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .pop-box {
+
+            background-image: linear-gradient(#2C3639 0%, #2C3639 10%, #606262 50%, #2C3639 90%, #2C3639 100%);
+            border-radius: 10px;
+            width: 50%;
+            height: 50%;
+
+        }
+
+
+        .item {
+            display: flex;
+            flex-direction: row;
+            border-radius: 10px;
+            justify-content: space-between;
+            padding: 10px;
+            height: 95%;
+            width: 100%;
+        }
+
+        .line-1 {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 10px;
+            height: 95%;
+            width: 100%;
+        }
+
+        .line-1A {
+            display: flex;
+            flex-direction: column;
+            height: 90%;
+            width: 100%;
+
+
+        }
+
+        .line-1a {
+            font-size: 25px;
+        }
+
+        .line-1a input {
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 25px;
+            background-color: #DCD7C9;
+
+        }
+
+        .line-1b {
+            padding: 15px 0px;
+            height: 85%;
+            width: 100%;
+        }
+
+        .line-1b textarea {
+            border-radius: 5px;
+            padding: 5px;
+            font-size: 15px;
+            height: 80%;
+            width: 100%;
+            text-overflow: ellipsis;
+            background-color: #DCD7C9;
+        }
+
+        /* ::placeholder {
+            color: #2C3639;
+        } */
+
+        .line-1B {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .line-1B input {
+            padding: 5px;
+            border-radius: 8px;
+            background-color: #DCD7C9;
+            color: #2C3639;
+        }
+
+        .line-1B button {
+            padding: 5px;
+            border-radius: 8px;
+            background-color: #A27B5C;
+            color: #DCD7C9;
+        }
+
+        .line-1B select {
+            padding: 5px;
+            border-radius: 8px;
+            background-color: #DCD7C9;
+            /* color: #DCD7C9; */
+        }
+
+        .line-2 {
+            padding: 10px 20px;
+            color: #DCD7C9;
+        }
+        .pop-container.active{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="togglePop()">Click here </button>
+    <div class="pop-container" id="pop-container">
+        <div class="pop-box box-1" id="pop-box">
+            <div class="item item1">
+                <div class="line-1">
+                    <div class="line-1A">
+                        <div class="line-1a"><input id="line-1ai" type="text" placeholder="Title of the task"></div>
+                        <div class="line-1b"><textarea id="line-1bi" name="description"
+                                placeholder="Description of task..."></textarea>
+                        </div>
+                    </div>
+                    <div class="line-1B">
+                        <input type="date">
+                        <select name="work" id="work">
+                            <option value="To Start">To Start</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                        <button type="submit" onclick="addTaskToStart()">Save task</button>
+                    </div>
+                </div>
+
+                <div class="line-2">
+                    <!-- <select name="work" id="work">
+                        <option value="To Start">To Start</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script>
+        function togglePop() {
+            let d = document.getElementById('pop-container')
+            d.classList.toggle('active')
+        }
+
+        async function addTaskToStart() {
+            let title = document.getElementById('line-1ai').value
+            let description = document.getElementById('line-1bi').value
+            let token = localStorage.getItem("token")
+            // console.log(token)
+            // console.log(localStorage)
+
+            const response = await axios.post("http://localhost:3000/user/todos",
+                {
+                    title: title,
+                    description: description
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "token": token
+                    }
+                })
+            console.log(response);
+            if (response.data.todo) {
+                console.log(response);
+
+                alert("Task saved")
+                // window.location.href = "dashboard.html"
+            }
+
+
+        }
+    </script>
+</body>
+
+</html>

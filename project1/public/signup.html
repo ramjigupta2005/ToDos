@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif, serif, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .form {
+            /* border: 10px solid rgb(6, 6, 5); */
+            width: 100vw;
+            height: 100vh;
+            /* background-color: rgb(104, 101, 101); */
+            display: flex;
+            justify-content: center;
+            /* justify-items: center; */
+            /* align-items: center; */
+            /* align-content: center; */
+            /* align-self: center; */
+            background-image: linear-gradient(#2C3639 0%, #2C3639 10%, #606262 50%, #2C3639 90%, #2C3639 100%);
+
+        }
+
+        .signupform {
+            border: 2px solid black;
+            border-radius: 20px;
+            width: 30vw;
+            height: 70vh;
+            background-image: linear-gradient(#2C3639 0%, #2C3639 10%, #606262 50%, #2C3639 90%, #2C3639 100%);
+            /* background-repeat: no-repeat; */
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            /* row-gap: 20px; */
+            align-self: center;
+            box-shadow: 0px 10px 18px 3px rgb(14, 14, 15);
+
+        }
+
+        .head-sign-up {
+            font-size: 40px;
+            color: #DCD7C9;
+
+        }
+
+        .details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 20px;
+
+            /* row-gap: 20px; */
+        }
+
+        #username {
+            font-size: 15px;
+            border-radius: 10px;
+            width: 20em;
+            height: 2em;
+            padding: 25px;
+            box-shadow: 0px 4px 20px 3px rgb(42, 42, 60);
+        }
+
+        #email {
+            font-size: 15px;
+            border-radius: 25;
+            width: 20em;
+            height: 2em;
+            padding: 25px;
+            box-shadow: 0px 4px 20px 3px rgb(42, 42, 60);
+        }
+
+        #password {
+            font-size: 15px;
+            border-radius: 10px;
+            width: 20em;
+            height: 2em;
+            padding: 25px;
+
+            box-shadow: 0px 4px 20px 3px rgb(42, 42, 60);
+        }
+
+        .sumbit {
+            border-radius: 5px;
+            /* width: 100px;
+            height: 30px; */
+            width: 12em;
+            height: 2em;
+            font-size: 20px;
+            /* padding: 10px; */
+            background-color: #A27B5C;
+
+            box-shadow: 0px 4px 20px 3px rgb(42, 42, 60);
+        }
+
+        .login {
+            color: #DCD7C9;
+        }
+
+        .sumbit:hover {
+            background-color: rgb(11, 119, 136);
+        }
+
+        .ask-user {
+            font-size: 20px;
+            color: #DCD7C9;
+            /* background-image: radial-gradient(); */
+        }
+
+        .login:hover {
+            transform: scale(1.5, 1.5);
+            color: rgb(134, 186, 99);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form">
+        <div class="signupform">
+            <div class="head-sign-up">Sign up</div>
+            <div class="details">
+                <input type="text" id="username" placeholder="Username">
+            </div>
+            <div class="details">
+                <input type="text" id="email" placeholder="Email">
+            </div>
+            <div class="details">
+                <input type="password" id="password" placeholder="Password">
+            </div>
+            <button type="submit" class="sumbit" onclick="signup()">Sign up</button>
+            <div class="ask-user">Existing user? <a class="login" href="signin.html">Login</a>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+        <script>
+            async function signup() {
+                const email = document.getElementById('email').value
+                const password = document.getElementById('password').value
+                const name = document.getElementById('username').value
+                if (!email || !password || !name) {
+                    alert('Please fill all details')
+                }
+                const response = await axios.post("http://localhost:3000/user/signup", {
+                    email: email,
+                    password: password,
+                    name: name
+                })
+                window.location.href = "signin.html"
+            }
+        </script>
+</body>
+
+</html>
