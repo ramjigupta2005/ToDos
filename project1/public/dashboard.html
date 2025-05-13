@@ -865,20 +865,27 @@
         }
 
         async function completeTodo(id) {
-            let token = localStorage.getItem("token")
-            console.log("completeTodo end");
-
-            const response = await axios.put("https://todos-pj3o.onrender.com/user/todos",
-                {
-                    headers: {
-                        "token": token,
-                        "uId": id
-                    }
-                }
-            )
-            console.log("completed");
+  console.log("id from complete todo", id);
+  let token = localStorage.getItem("token");
+  let status = "Completed";
+  
+  try {
+    const response = await axios.put(
+      "https://todos-pj3o.onrender.com/user/todos",
+      { status: status },
+      {
+        headers: {
+          "token": token,
+          "x-uid": id
         }
-
+      }
+    );
+    window.location.reload()
+    console.log("completed", response.data);
+  } catch (error) {
+    console.error("Error completing todo:", error);
+  }
+}
     </script>
 </body>
 

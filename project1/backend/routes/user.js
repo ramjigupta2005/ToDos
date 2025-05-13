@@ -80,21 +80,31 @@ userRouter.post('/todos', authMiddleware, async function (req, res) {
     })
 })
 userRouter.put('/todos', authMiddleware, async function (req, res) {
-    const userId = req.userId
+    const userId = req.userId       
     const { title, description, date, status } = req.body
-    const uId=req.headers
-    console.log(uId);
+    const uid=req.headers['x-uid']
+   
+
+    try {
+        const todo = await todoModel.updateOne({ userId: userId, uId: uid }, {
+            title: title,
+            description: description,
+            date: date,
+            status: status
+        })
+        res.json({
+            message: "Todo updated",
+            todo: todo
+        })
+    } catch (error) {
+        console.error(error);
+        return res.status(404).json({
+            message: "Put request failed",
+            error
+        })
+    }
     
-    const todo = await todoModel.updateOne({ userId: userId, uId: uId }, {
-        title: title,
-        description: description,
-        datwe: date,
-        status: status
-    })
-    res.json({
-        message: "Todo updated",
-        todo: todo
-    })
+    
 })
 userRouter.get('/todos', authMiddleware, async function (req, res) {
     const userId = req.userId

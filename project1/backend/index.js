@@ -13,5 +13,13 @@ app.use(express.json())
 app.use(cors())
 app.use('/user', userRouter)
 app.use('/todo', todoRouter)
-mongoose.connect(mongoUrl)
-app.listen(3000)
+mongoose.connect(mongoUrl).then(()=>{
+    console.log("Database connected successfully")
+}).catch((e)=>{
+console.log(`Error occured ${e}`);
+})
+// app.listen(3000)
+
+app.listen(3000, ()=>{
+    console.log("The server is running on port 3000")
+})
