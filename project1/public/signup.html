@@ -149,7 +149,7 @@
                 if (!email || !password || !name) {
                     alert('Please fill all details')
                 }
-                const response = await axios.post("http://localhost:3000/user/signup", {
+                const response = await axios.post("https://todos-pj3o.onrender.com/user/signup", {
                     email: email,
                     password: password,
                     name: name

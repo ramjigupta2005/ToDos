@@ -91,7 +91,7 @@
         async function addtodo() {
             const title = document.getElementById('title').value
             const description = document.getElementById('description').value
-            const response = await axios.post("http://localhost:3000/user/todos", {
+            const response = await axios.post("https://todos-pj3o.onrender.com/user/todos", {
                 title: title,
                 description: description
             })
@@ -103,7 +103,7 @@
         async function upatetodo() {
             const title = document.getElementById('title').value
             const description = document.getElementById('description').value
-            const response = await axios.put("http://localhost:3000/user/todos", {
+            const response = await axios.put("https://todos-pj3o.onrender.com/user/todos", {
                 title: title,
                 description: description
             })
@@ -113,7 +113,7 @@
             document.body.appendChild('d')
         }
         async function getTodo() {
-            const response = await axios.get('http://localhost:3000/user/todos', {
+            const response = await axios.get('https://todos-pj3o.onrender.com/user/todos', {
                 headers: {
                     'token': localStorage.getItem("authToken"),
                 }
@@ -124,7 +124,7 @@
             document.body.appendChild('d')
         }
         async function deletetodo() {
-            const response = await axios.delete("http://localhost:3000/user/todos")
+            const response = await axios.delete("https://todos-pj3o.onrender.com/user/todos")
 
         }
         // function getStart(){

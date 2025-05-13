@@ -686,7 +686,7 @@
 
         window.onload = async function task() {
             const token = localStorage.getItem("token")
-            const response = await axios.get("http://localhost:3000/user/todos",
+            const response = await axios.get("https://todos-pj3o.onrender.com/user/todos",
                 {
                     headers: {
                         "token": token
@@ -819,7 +819,7 @@
             // console.log();
 
 
-            const response2 = await axios.get("http://localhost:3000/user", {
+            const response2 = await axios.get("https://todos-pj3o.onrender.com/user", {
                 headers: { "token": token }
             })
             // console.log(response2)
@@ -841,7 +841,7 @@
 
         async function upateTodo() {
             let token = localStorage.getItem("token")
-            const response = await axios.put("http://localhost:3000/user/todos",
+            const response = await axios.put("https://todos-pj3o.onrender.com/user/todos",
                 {
                     headers: {
                         "token": token
@@ -853,7 +853,7 @@
             console.log("delete in todo");
 
             let token = localStorage.getItem("token")
-            const response2 = await axios.delete("http://localhost:3000/user/todos",
+            const response2 = await axios.delete("https://todos-pj3o.onrender.com/user/todos",
                 {
                     headers: {
                         "token": token,
@@ -868,7 +868,7 @@
             let token = localStorage.getItem("token")
             console.log("completeTodo end");
 
-            const response = await axios.put("http://localhost:3000/user/todos",
+            const response = await axios.put("https://todos-pj3o.onrender.com/user/todos",
                 {
                     headers: {
                         "token": token,

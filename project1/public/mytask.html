@@ -117,7 +117,7 @@
     <script>
         window.onload = async function task() {
             const token = localStorage.getItem("token")
-            const response = await axios.get("http://localhost:3000/user/todos",
+            const response = await axios.get("https://todos-pj3o.onrender.com/user/todos",
                 {
                     headers: {
                         "token": token
