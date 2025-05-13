@@ -67,33 +67,49 @@
             /* flex-wrap: nowrap; */
             flex-direction: column;
             border-radius: 10px;
-            /* justify-content: space-around; */
+            justify-content: space-between;
             /* width: 33%; */
-            min-height: 80%;
+            min-height: 25%;
             /* overflow-x: hidden; */
-            border: 2px solid white;
+            border: 2px solid #A27B5C;
         }
 
         .b {
 
-            padding: 15px;
+            /* padding: 15px; */
 
         }
 
         .c {
 
             font-size: 30px;
-            color: rgb(155, 190, 221);
+            font-weight: 800;
+            color: #DCD7C9;
+            background-color: #A27B5C;
+            border-radius: 5px;
+            padding: 5px 15px;
         }
 
         .d {
             padding: 15px 0px;
             font-size: 18px;
-            color: aliceblue;
+            color: #DCD7C9;
+            padding: 15px;
         }
 
         .e {
-            padding: 15px 0px;
+            /* padding: 0px 15px; */
+        }
+        .f{
+            /* padding: 0px 15px; */
+        }
+        .g{
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            padding-bottom: 10px;
+            font-size: 20px;
+            color: #DCD7C9;
         }
     </style>
 </head>
@@ -136,17 +152,22 @@
                 e.setAttribute("class", "e")
                 let f = document.createElement('div')
                 f.setAttribute("class", "f")
+                let g = document.createElement('div')
+                g.setAttribute("class", "g")
                 b.appendChild(c)
                 b.appendChild(d)
+                g.appendChild(e)
+                g.appendChild(f)
                 a.appendChild(b)
-                a.appendChild(e)
-                // a.appendChild(b)
+                a.appendChild(g)
                 const container = document.getElementsByClassName('container')[0]
                 container.appendChild(a)
                 // d.innerHTML=
                 console.log(response.data.todo[i]);
                 c.innerHTML = response.data.todo[i].title
                 d.innerHTML = response.data.todo[i].description
+                e.innerHTML=response.data.todo[i].date
+                f.innerHTML=response.data.todo[i].status
                 // e.innerHTML = response.data.todo[i].date
 
 
